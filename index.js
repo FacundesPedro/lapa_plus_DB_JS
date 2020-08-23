@@ -2,8 +2,6 @@
 //const app = express()
 const connection = require('./connection');
 
-
-
 class carro {
     constructor(modelo,fabricaID){
         this.modelo = modelo
@@ -24,8 +22,6 @@ const fabrica1 = new fabrica('fabrica1');
 const fabrica2 = new fabrica('fabrica2');
 const fabrica3 = new fabrica('fabrica4');
 
-
-//listando 
 const listarCarros = async function(string = '*'){
     
     const results = await connection('carros').select(string)
@@ -40,20 +36,26 @@ const cadastrarFabrica = async(fabrica)=>{
 const cadastrarCarro = async (carro) =>{
     await connection('carros')
         .insert(carro) 
+        
         console.log(`Carro ${carro} cadastrado amigo`)  
 }  
 
-const search_carro_by_id = async(int)=>{
+const search_carro_by_car_id = async(id)=>{
     const results = await connection('carros')
-        .where('carros.id',int)
+        .where('carros.id',id)
         .select(["carros.modelo","fabricas.name as fabNOME"])
         .join('fabricas','carros.fabrica_ID','=','fabricas.id')
-           
-    
-    
 
         console.log(results)
 }
-
-listarCarros()
-//search_carro_by_id(2)
+const search_carro_by_fabricaID = async(id) =>{
+    const results = await connection('fabricas')
+        .where('carros.fabrica_ID',id)
+        .select(["carros.modelo","fabricas.name as fabNOME"])
+        .join('carros','fabricas.id','=','carros.fabrica_ID')
+        
+        console.log(results)
+    }   
+//listarCarros()
+//search_carro_by_car_id(2)
+//search_carro_by_fabricaID(2)

@@ -7,7 +7,7 @@ module.exports = {
     connection: {
       host:'127.0.0.1',
       database: "knex_test",
-      user: "postgres",
+      user: "lapa",
       password: "lapagod123"
     },
     migrations: {
