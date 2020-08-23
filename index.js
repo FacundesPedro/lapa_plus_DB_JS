@@ -56,6 +56,15 @@ const search_carro_by_fabricaID = async(id) =>{
         
         console.log(results)
     }   
-//listarCarros()
+
+const test = async(id)=>{
+    const results = await connection('carros')
+        .select('modelo')
+        .where('id','>',id)
+
+        console.log(results)
+}
+listarCarros()
 //search_carro_by_car_id(2)
 //search_carro_by_fabricaID(2)
+test(1)
